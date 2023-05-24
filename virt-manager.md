@@ -1,9 +1,9 @@
-# Create storage
+## Create storage
 ```
 sudo dd if=/dev/zero of=/var/lib/libvirt/images/guest.img bs=1M count=20480
 ```
 
-# Download ISO and specifiy storage space you just created and the ISO for installation
+## Download ISO and specifiy storage space you just created and the ISO for installation
 ```
 sudo virt-install --name Fedora38 \
 --description 'Fedora 38 Workstation' \
