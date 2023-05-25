@@ -7,6 +7,8 @@
 
 [Configure Cosa Alias](https://coreos.github.io/coreos-assembler/building-fcos/)
 
+[Cosa Build Documentation](https://coreos.github.io/coreos-assembler/cosa/)
+
 `cosa run --qemu-image rhcos_test.qcow2 --ignition ign_test.ign --kargs 'foo bar' --devshell-console`
 
 
