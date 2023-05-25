@@ -16,3 +16,8 @@
 
 ### basic kola command
 `cosa kola --basic-qemu-scenarios`
+
+### adding kola test patterns
+[Kola Documentation](https://coreos.github.io/coreos-assembler/kola/)
+
+`find -name 'kola-denylist.yaml`
