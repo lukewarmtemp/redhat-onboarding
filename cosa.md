@@ -5,4 +5,8 @@
 
 [Cosa Kernel Arguments](https://coreos.github.io/coreos-assembler/cosa/run/#additional-kernel-arguments)
 
-`cosa run '--qemu-image=rhcos_test.qcow2' '--ignition=ign_test.ign' --kargs 'foo bar'`
+`cosa run --qemu-image rhcos_test.qcow2 --ignition ign_test.ign --kargs 'foo bar' --devshell-console`
+
+
+## To exit out of devshell console
+`sudo poweroff`
