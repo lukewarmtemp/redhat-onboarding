@@ -10,3 +10,7 @@
 
 ### To exit out of devshell console
 `sudo poweroff`
+
+
+### basic kola command
+`cosa kola --basic-qemu-scenarios`
