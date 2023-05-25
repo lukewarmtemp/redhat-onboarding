@@ -5,6 +5,8 @@
 
 [Cosa Kernel Arguments](https://coreos.github.io/coreos-assembler/cosa/run/#additional-kernel-arguments)
 
+[Configure Cosa Alias](https://coreos.github.io/coreos-assembler/building-fcos/)
+
 `cosa run --qemu-image rhcos_test.qcow2 --ignition ign_test.ign --kargs 'foo bar' --devshell-console`
 
 
