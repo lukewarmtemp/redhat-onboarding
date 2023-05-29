@@ -23,3 +23,8 @@
 [Kola Documentation](https://coreos.github.io/coreos-assembler/kola/)
 
 `find -name 'kola-denylist.yaml`
+
+### Adding Kola Tests
+[xeno pipefail informaition](https://gist.github.com/mohanpedala/1e2ff5661761d3abd0385e8223e16425?permalink_comment_id=3945021)
+
+`set -xeuo pipefail` is used in the test in order to stop the script from running when certain errors occur. If you o not set these flags, certain errors may be ignored and will continue running.
