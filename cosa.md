@@ -44,3 +44,18 @@ podman run -it --name fedora38 --volume src:/home/luyang/.local/share/containers
 podman start fedora38
 podman exec -it fedora38 /bin/bash
 ```
+
+### Creating new Kola Tests
+Fork and clone the repo:
+```
+git clone git@github.com:lukewarmtemp/coreos-assembler.git
+```
+
+Run the build script in the root folder, edit the kola tests based on this [documentation](https://coreos.github.io/coreos-assembler/kola/adding-tests/)
+
+Go into the mantle folder and run
+```
+./build kola
+```
+
+Go to the root folder and rebuild cosa from the root folder.
