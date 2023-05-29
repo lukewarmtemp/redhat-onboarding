@@ -33,3 +33,14 @@
 ```
 cosa shell
 ```
+
+### Creating a Container Enviornment for Development using Podman
+```
+podman volume create <volume name>
+```
+Find volume location at `/home/USER/.local/share/containers/storage/volumes`
+```
+podman run -it --name fedora38 --volume src:/home/luyang/.local/share/containers/storage/volumes/kola-test-volume registry.fedoraproject.org/fedora:38
+podman start fedora38
+podman exec -it fedora38 /bin/bash
+```
