@@ -93,3 +93,76 @@ butane --pretty --strict ign_test.bu > ign_test.ign
 ```
 kola run ext.config.shared.files.file-directory-permissions --append-ignition ign_test.ign
 ```
+This should produce and error
+```
+vim ./src/config/fedora-coreos-config/tests/kola/files/file-directory-permissions
+```
+```
+#!/bin/bash
+## kola:
+##   exclusive: false
+##   description: Verify that there are no files and directories 
+##     with 'g+w' or 'o+w' permission in /etc, except the known lists.
+
+set -xeuo pipefail
+
+. $KOLA_EXT_DATA/commonlib.sh
+
+# List of known files and directories with group write permission
+list_known=(
+	'/etc/test'
+)
+
+# List of known files and directories with group write permission (RHCOS only)
+list_known_rhcos=(
+    ## '/usr/share/licenses/publicsuffix-list-dafsa/COPYING'
+    '/usr/paosmdfpasomds'
+)
+
+is_fcos="false"
+if [[ "$(source /etc/os-release && echo "${ID}")" == "fedora" ]]; then
+    is_fcos="true"
+fi
+
+echo 'HELOOOOOOOOOOOOOO======================='
+echo read -r -d '' e  
+unknown=""
+while IFS= read -r -d '' e; do
+    echo 'entered in while loop!'
+    found="false"
+    for k in "${list_known[@]}"; do
+        if [[ "${k}" == "${e}" ]]; then
+            found="true"
+            break
+        fi
+    done
+    echo "Is fcos?"
+    echo ${is_fcos}
+    echo "End is fcos"
+    if [[ "${is_fcos}" == "false" ]]; then
+	echo "NOT FCOS"
+        for k in "${list_known_rhcos[@]}"; do
+            if [[ "${k}" == "${e}" ]]; then
+                found="true"
+		echo "AHHHHHHHHHHHHHHHHH" 
+		echo "${e}"
+		echo "AHJHJhHHHHHHHH"
+                break
+            fi
+        done
+    fi
+    if [[ "${found}" == "false" ]]; then
+        unknown+=" ${e}"
+    fi
+done< <(find /usr /etc -type f -perm /022 -print0 -o -type d -perm /022 -print0)
+
+echo 'exit while loop'
+
+if [[ -n "${unknown}" ]]; then
+    find /usr /etc -type f -perm /022 -print0 -o -type d -perm /022 -print0 | xargs -0 ls -al
+    find /usr /etc -type f -perm /022 -print0 -o -type d -perm /022 -print0 | xargs -0 rpm -qf
+    fatal "found files or directories with 'g+w' or 'o+w' permission"
+fi
+ok "no files with 'g+w' or 'o+w' permission found in /etc"
+```
+By adding the new file we created (which has write permissions) to the list of known files, we should now pass the test
