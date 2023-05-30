@@ -59,3 +59,37 @@ Go into the mantle folder and run
 ```
 
 Go to the root folder and rebuild cosa from the root folder.
+
+### making changes to [file directory permissions test](https://github.com/coreos/fedora-coreos-config/blob/testing-devel/tests/kola/files/file-directory-permissions)
+```yaml
+variant: fcos
+version: 1.4.0
+passwd:
+  users:
+   - name: core
+     ssh_authorized_keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDZHnKzuQjyt6elFsm2XHEHxrGOK7Es9HlJp70hN3JLViwGgFCPv5TQBItZD58xsdmk9QfcwnS0ojaIZdERZeMX7j/uxnVy3j/yjrcdQs2o/CB7IJRiRUTH7nmDa1MlXEFOTIcW160+FHfvywx91kNoVxx8Kq/b1l/KS3ZCiTF77T0KzD9LH9FlaoLOX6WWym
+systemd:
+  units:
+    - name: luke.service
+      enabled: true
+      contents:
+        "[Service]\n
+         Type=oneshot\n
+         ExecStart=/usr/bin/echo This is a service test!\n\n
+         
+         [Install]\n
+         WantedBy=multi-user.target"
+storage:
+  files:
+    - path: /etc/test
+      mode: 0777
+      contents:
+        inline: "Hello World!"
+```
+```
+butane --pretty --strict ign_test.bu > ign_test.ign
+```
+```
+kola run ext.config.shared.files.file-directory-permissions --append-ignition ign_test.ign
+```
