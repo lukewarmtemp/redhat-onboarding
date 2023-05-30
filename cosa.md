@@ -166,3 +166,5 @@ fi
 ok "no files with 'g+w' or 'o+w' permission found in /etc"
 ```
 By adding the new file we created (which has write permissions) to the list of known files, we should now pass the test
+
+If you happen to do the test on a distribution of fcos, putting `/etc/test` into the list of known rhcos files should still result in an error.
